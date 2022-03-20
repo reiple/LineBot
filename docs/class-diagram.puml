@@ -1,0 +1,124 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'scale 750 width
+'hide @unlinked
+
+package collab <<Frame>> {
+    class ICommand
+    abstract AbstractCommand {
+        -option1: AbstractFirstOption
+        -option2: AbstractSecondOption
+        -option3: AbstractThirdOption
+        -commandArguments: String[*] {collection="List"}
+
+        +AbstractFirstOption getFirstOption()
+        +AbstractSecondOption getSecondOption()
+        +AbstractThirdOption getThirdOption()
+        +List<String> getCommandArguments()
+        {abstract} +String executeCommand(EmployeeDAO)
+    }
+    class ModifyCommand {
+       {method} +String executeCommand(EmployeeDAO)
+    }
+    class SearchCommand {
+       {method} +String executeCommand(EmployeeDAO)
+    }
+    class AddCommand {
+       {method} +String executeCommand(EmployeeDAO)
+    }
+    class DeleteCommand {
+       {method} +String executeCommand(EmployeeDAO)
+    }
+    class Main
+    class EmployeeDAO
+    class EmployeeManager
+    class Employee
+    abstract AbstractFirstOption {
+        {abstract} +String getFilteredList(List<Employee>)
+    }
+    abstract AbstractSecondOption {
+        -COL:int = 0 {readOnly}
+        -VAL:int = 1 {readOnly}
+        ~optionArguments: String[*] {collection="List"}
+        +getSearchColumn:String
+        +getSearchValue:String
+        {abstract} +getFilteredList(EmployeeDAO):List<Employee>
+    }
+    abstract AbstractThirdOption{
+        {method} +String getFilteredList(List<Employee> inputList)
+    }
+}
+
+ICommand <|.. AbstractCommand #black
+
+AbstractCommand <|-- ModifyCommand #black
+AbstractCommand <|-- SearchCommand #black
+AbstractCommand <|-- AddCommand #black
+AbstractCommand <|-- DeleteCommand #black
+
+package collab.options.first <<Frame>> {
+    class NoneFirstOption {
+        {method} +String getFilteredList(List<Employee>)
+    }
+    class PrintOption {
+        {method} +String getFilteredList(List<Employee>)
+    }
+    class EmptyFirstOption {
+        {method} +String getFilteredList(List<Employee>)
+    }
+}
+
+package collab.options.second <<Frame>> {
+
+    class NoneSecondOption {
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class FirstNameOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class LastNameOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class MiddlePhoneNumberOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class LastPhoneNumberOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class YearOfBirthdayOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class MonthOfBirthdayOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+    class DayOfBirthdayOption{
+        {method} +List<Employee> getFilteredList(EmployeeDAO)
+    }
+}
+
+'AbstractFirstOption <|-- NoneFirstOption #blue
+'AbstractFirstOption <|-- PrintOption  #blue
+'AbstractFirstOption <|-- EmptyFirstOption  #blue
+AbstractFirstOption <|-- collab.options.first #blue
+
+
+
+'AbstractSecondOption <|-- NoneSecondOption #red
+'AbstractSecondOption <|-- FirstNameOption #red
+'AbstractSecondOption <|-- LastNameOption #red
+'AbstractSecondOption <|-- MiddlePhoneNumberOption #red
+'AbstractSecondOption <|-- LastPhoneNumberOption #red
+'AbstractSecondOption <|-- YearOfBirthdayOption #red
+'AbstractSecondOption <|-- MonthOfBirthdayOption #red
+'AbstractSecondOption <|-- DayOfBirthdayOption #red
+
+AbstractSecondOption <|-- collab.options.second #red
+
+
+
+
+
+
+
+@enduml
