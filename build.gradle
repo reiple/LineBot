@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "org.sonarqube" version "3.3"
 }
 
 group 'org.example'
@@ -12,6 +13,14 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "reiple_LineBot"
+        property "sonar.organization", "reiple"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
 
 test {
