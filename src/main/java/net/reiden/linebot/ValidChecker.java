@@ -5,5 +5,7 @@ public class ValidChecker {
   public boolean isValid(int a, int b) {
     return a == b;
   }
+  public boolean isPossible() {return true;}
+  public void print() { System.out.println("TEST");}
 
 }
