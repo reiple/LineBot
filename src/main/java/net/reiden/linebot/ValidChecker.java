@@ -6,5 +6,6 @@ public class ValidChecker {
     return a == b;
   }
   public boolean isPossible() {return true;}
+  public void print() { System.out.println("TEST");}
 
 }
